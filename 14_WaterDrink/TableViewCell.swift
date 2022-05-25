@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol ModeClick{
-    func btnClick()
-}
-
 class TableViewCell: UITableViewCell {
     
     let cellID = "cellID"
@@ -37,14 +33,12 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-    var mode : UISwitch = {
-        let mode = UISwitch()
-        mode.translatesAutoresizingMaskIntoConstraints = false
-        mode.addTarget(self, action: #selector(btnClick(_:)), for: .valueChanged)
-        return mode
+    var modeLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
-    
-    var delegate : ModeClick?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -61,7 +55,7 @@ class TableViewCell: UITableViewCell {
         self.addSubview(alarmImg)
         self.addSubview(apmLabel)
         self.addSubview(timeLabel)
-        self.addSubview(mode)
+        self.addSubview(modeLabel)
         
         NSLayoutConstraint.activate([
             self.alarmImg.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
@@ -75,12 +69,8 @@ class TableViewCell: UITableViewCell {
             self.timeLabel.leadingAnchor.constraint(equalTo: self.apmLabel.trailingAnchor, constant: 5),
             self.timeLabel.centerYAnchor.constraint(equalTo: self.alarmImg.centerYAnchor),
             
-            self.mode.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            self.mode.centerYAnchor.constraint(equalTo: self.alarmImg.centerYAnchor)
+            self.modeLabel.centerYAnchor.constraint(equalTo: self.alarmImg.centerYAnchor),
+            self.modeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
-    }
-    
-    @objc func btnClick(_ sender:Any){
-        self.delegate?.btnClick()
     }
 }
