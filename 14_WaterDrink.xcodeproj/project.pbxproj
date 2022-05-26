@@ -17,6 +17,7 @@
 		D4B689FD283CDA72000924C2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B689FC283CDA72000924C2 /* TableViewCell.swift */; };
 		D4B689FF283CE66E000924C2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B689FE283CE66E000924C2 /* Alert.swift */; };
 		D4B68A01283E2A9A000924C2 /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B68A00283E2A9A000924C2 /* AddAlarmViewController.swift */; };
+		D4B68A03283F7FA6000924C2 /* UNNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B68A02283F7FA6000924C2 /* UNNotificationCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		D4B689FC283CDA72000924C2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		D4B689FE283CE66E000924C2 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		D4B68A00283E2A9A000924C2 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
+		D4B68A02283F7FA6000924C2 /* UNNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNNotificationCenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				D4B689E6283CD87E000924C2 /* AppDelegate.swift */,
 				D4B689E8283CD87E000924C2 /* SceneDelegate.swift */,
 				D4B689EA283CD87E000924C2 /* ViewController.swift */,
+				D4B68A02283F7FA6000924C2 /* UNNotificationCenter.swift */,
 				D4B68A00283E2A9A000924C2 /* AddAlarmViewController.swift */,
 				D4B689FA283CD988000924C2 /* TableView.swift */,
 				D4B689FC283CDA72000924C2 /* TableViewCell.swift */,
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B68A03283F7FA6000924C2 /* UNNotificationCenter.swift in Sources */,
 				D4B689FF283CE66E000924C2 /* Alert.swift in Sources */,
 				D4B689FD283CDA72000924C2 /* TableViewCell.swift in Sources */,
 				D4B68A01283E2A9A000924C2 /* AddAlarmViewController.swift in Sources */,

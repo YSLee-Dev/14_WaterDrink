@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ViewController: UIViewController {
     
@@ -20,6 +21,8 @@ class ViewController: UIViewController {
         
         return table
     }()
+    
+    var userNoti = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +63,12 @@ extension ViewController : UITableViewDataSource{
         cell.modeLabel.text = String(self.alertList[indexPath.row].isOn)
         cell.apmLabel.text = self.alertList[indexPath.row].apm
         cell.timeLabel.text = self.alertList[indexPath.row].time
+        
+        if !self.alertList[indexPath.row].isOn {
+            cell.backgroundColor = .gray
+        }else{
+            cell.backgroundColor = .white
+        }
         return cell
     }
     
@@ -90,6 +99,7 @@ extension ViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle{
         case .delete:
+            self.userNoti.removePendingNotificationRequests(withIdentifiers: [self.alertList[indexPath.row].id])
             self.alertList.remove(at: indexPath.row)
             self.tableView.tableView.deleteRows(at: [indexPath], with: .right)
             UserDefaults.standard.set(try? PropertyListEncoder().encode(self.alertList), forKey: "alerts")
@@ -100,14 +110,21 @@ extension ViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.alertList[indexPath.row].isOn = !self.alertList[indexPath.row].isOn
-        self.tableView.tableView.reloadData()
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(self.alertList), forKey: "alerts")    }
+        self.tableView.tableView.reloadRows(at: [indexPath], with: .right)
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(self.alertList), forKey: "alerts")
+        
+        if self.alertList[indexPath.row].isOn{
+            self.userNoti.addNofi(alert: self.alertList[indexPath.row])
+        }else {
+            self.userNoti.removePendingNotificationRequests(withIdentifiers: [self.alertList[indexPath.row].id])
+        }
+    }
 }
 
 extension ViewController : AddAlarm{
     func okBtnClick(text: String, date: Date) {
         var alertList = self.alertListLoading()
-        let newAlert = Alert(date: date, isOn: false, msg: text)
+        let newAlert = Alert(date: date, isOn: true, msg: text)
         
         alertList.append(newAlert)
         alertList.sort{
@@ -116,6 +133,9 @@ extension ViewController : AddAlarm{
         self.alertList = alertList
         
         UserDefaults.standard.set(try? PropertyListEncoder().encode(alertList), forKey: "alerts")
+        
+        // 노티 추가
+        self.userNoti.addNofi(alert: newAlert)
         
         self.tableView.tableView.reloadData()
     }
